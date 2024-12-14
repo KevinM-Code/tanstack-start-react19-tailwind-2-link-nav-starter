@@ -8,6 +8,7 @@ import { Meta, Scripts } from "@tanstack/start";
 import type { ReactNode } from "react";
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import "./main.css"
+import Navigation from "../components/navigation";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -30,26 +31,7 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <RootDocument>
-       <div className="p-2 flex gap-2 text-lg">
-        <Link
-          to="/"
-          activeProps={{
-            className: 'font-bold',
-          }}
-          activeOptions={{ exact: true }}
-        >
-          Home
-        </Link>{' '}
-        <Link
-          to="/about"
-          activeProps={{
-            className: 'font-bold',
-          }}
-        >
-          About
-        </Link>
-      </div>
-      <hr />
+      <Navigation/>
       <Outlet />
       <TanStackRouterDevtools position="bottom-right" />
     </RootDocument>
