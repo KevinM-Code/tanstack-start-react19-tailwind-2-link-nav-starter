@@ -1,14 +1,24 @@
 import { createServerFn } from "@tanstack/start";
-import * as fs from "node:fs";
 import { z } from "zod";
 import * as v from "valibot";
+
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 const filePath = "count.txt";
 
 async function readCount() {
-  return parseInt(
-    await fs.promises.readFile(filePath, "utf-8").catch(() => "0")
-  );
+  let total = await prisma.total.findFirst()
+  if (total?.total === undefined) {
+    total = await prisma.total.create({
+      data: {
+        id: 1,
+        total: 0,
+      },
+    })
+  }
+  return total?.total
 }
 
 export const getCount = createServerFn({ method: "GET" }).handler(() => {
@@ -26,7 +36,18 @@ const standardSchema = v.object({ increment: v.number() });
 export const updateCount = createServerFn({ method: "POST" })
   .validator(standardSchema)
   .handler(async ({ data }) => {
-    console.log("updateCount");
     const count = await readCount();
-    await fs.promises.writeFile(filePath, `${count + data.increment}`);
+    
+    let newTotal
+    if (count !== undefined) {
+      newTotal = count + data.increment
+    }
+    await prisma.total.update({
+      where: {
+        id: 1,
+      },
+      data: {
+        total: newTotal
+      },
+    })
   });

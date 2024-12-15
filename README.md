@@ -1,8 +1,21 @@
 # tanstack-start-react19-tailwind-2-link-nav-starter
-A Tanstack Start starting project using React 19 and tailwind with 2-navigation links and some server functions that write to a file.
+A Tanstack Start starting project using React 19 and tailwind with 2-navigation links and some server functions.
 
-# Production CSS
+# Development
+
 ```
+pnpm prisma generate 
+pnpm prisma migrate dev
+
+pnpm dev
+```
+
+# Local Production Build with CSS and Prisma
+
+```
+pnpm prisma generate 
+pnpm prisma migrate dev
+
 pnpm build
 ```
 ### Just in case
@@ -18,5 +31,7 @@ npx tailwindcss -i app/routes/main.css -o .output/public/assets/global.css --min
 change in the __root.tsx file in the `RootDocument` function to `<link rel="stylesheet" href="/assets/global.css"/>` 
 and delete the other css file
 ```
-pnpm start
+node --env-file=.env .output/server/index.mjs
 ```
+
+

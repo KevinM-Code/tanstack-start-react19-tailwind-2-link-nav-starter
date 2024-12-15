@@ -132,3 +132,4 @@ count.txt
 
 .output/*
 .vinxi/*
+prisma/migrations/*
