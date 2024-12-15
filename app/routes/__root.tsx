@@ -1,5 +1,4 @@
 import {
-  Link,
   Outlet,
   ScrollRestoration,
   createRootRoute,
@@ -7,7 +6,7 @@ import {
 import { Meta, Scripts } from "@tanstack/start";
 import type { ReactNode } from "react";
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
-import "./main.css"
+import './main.css';
 import Navigation from "../components/navigation";
 
 export const Route = createRootRoute({
@@ -23,14 +22,14 @@ export const Route = createRootRoute({
       {
         title: "TanStack Start Starter",
       },
-    ],
+    ],    
   }),
   component: RootComponent,
 });
 
 function RootComponent() {
   return (
-    <RootDocument>
+    <RootDocument>      
       <Navigation/>
       <Outlet />
       <TanStackRouterDevtools position="bottom-right" />
@@ -43,6 +42,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
     <html>
       <head>
         <Meta />
+        <link rel="stylesheet" href="/assets/ssr-DvDdi3ED.css"/>
       </head>
       <body>
         {children}
