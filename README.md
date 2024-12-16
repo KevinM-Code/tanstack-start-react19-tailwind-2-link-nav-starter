@@ -11,7 +11,7 @@ pnpm tsx db/seed.ts
 pnpm dev
 ```
 
-# Local Production Build with CSS and Prisma
+# Local Production Build with CSS and Drizzle
 
 ```
 pnpm drizzle-kit generate 
