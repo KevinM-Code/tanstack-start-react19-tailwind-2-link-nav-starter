@@ -3,12 +3,27 @@ import * as fs from "node:fs";
 import { z } from "zod";
 import * as v from "valibot";
 
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { total } from "../db/schema";
+import { eq } from "drizzle-orm";
+const db = drizzle(process.env.DATABASE_URL!);
+
 const filePath = "count.txt";
 
 async function readCount() {
-  return parseInt(
-    await fs.promises.readFile(filePath, "utf-8").catch(() => "0")
-  );
+  const result = await db.select({
+    field1: total.total,
+  }).from(total);
+
+  if (result.length !== 0) {
+    const { field1 } = result[0];
+    return field1
+
+  } else {
+    const theNumber = await db.insert(total).values({ total: 0 }).returning();
+    return theNumber[0].total
+  }
+
 }
 
 export const getCount = createServerFn({ method: "GET" }).handler(() => {
@@ -28,5 +43,7 @@ export const updateCount = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     console.log("updateCount");
     const count = await readCount();
-    await fs.promises.writeFile(filePath, `${count + data.increment}`);
+    await db.update(total)
+      .set({ total: count + data.increment })
+      .where(eq(total.id, 1));
   });
