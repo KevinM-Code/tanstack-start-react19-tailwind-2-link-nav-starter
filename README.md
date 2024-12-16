@@ -20,3 +20,8 @@ and delete the other css file
 ```
 pnpm start
 ```
+
+```
+git clone --single-branch --branch withPrisma https://github.com/KevinM-Code/tanstack-start-react19-tailwind-2-link-nav-starter.git
+git clone --single-branch --branch withDrizzle https://github.com/KevinM-Code/tanstack-start-react19-tailwind-2-link-nav-starter.git
+```
