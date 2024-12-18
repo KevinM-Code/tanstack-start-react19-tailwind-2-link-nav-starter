@@ -42,7 +42,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
     <html>
       <head>
         <Meta />
-        <link rel="stylesheet" href="/assets/ssr-DvDdi3ED.css"/>
+        <link rel="stylesheet" href="/assets/ssr-DLOpnERD.css"/>
       </head>
       <body>
         {children}
