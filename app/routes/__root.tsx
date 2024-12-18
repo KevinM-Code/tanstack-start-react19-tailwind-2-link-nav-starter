@@ -4,10 +4,25 @@ import {
   createRootRoute,
 } from "@tanstack/react-router";
 import { Meta, Scripts } from "@tanstack/start";
-import type { ReactNode } from "react";
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { Suspense, type ReactNode } from "react";
+//import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import './main.css';
 import Navigation from "../components/navigation";
+import React from "react";
+
+const TanStackRouterDevtools =
+  process.env.NODE_ENV === 'production'
+    ? () => null // Render nothing in production
+    : React.lazy(() =>
+        // Lazy load in development
+        import('@tanstack/router-devtools').then((res) => ({
+          default: res.TanStackRouterDevtools,
+          // For Embedded Mode
+          // default: res.TanStackRouterDevtoolsPanel
+        })),
+      )
+
+      console.log("Dev Tools ", TanStackRouterDevtools)
 
 export const Route = createRootRoute({
   head: () => ({
@@ -22,17 +37,19 @@ export const Route = createRootRoute({
       {
         title: "TanStack Start Starter",
       },
-    ],    
+    ],
   }),
   component: RootComponent,
 });
 
 function RootComponent() {
   return (
-    <RootDocument>      
-      <Navigation/>
+    <RootDocument>
+      <Navigation />
       <Outlet />
-      <TanStackRouterDevtools position="bottom-right" />
+      <Suspense>
+        <TanStackRouterDevtools position="bottom-right" />
+      </Suspense>
     </RootDocument>
   );
 }
@@ -42,7 +59,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
     <html>
       <head>
         <Meta />
-        <link rel="stylesheet" href="/assets/ssr-DLOpnERD.css"/>
+        <link rel="stylesheet" href="/assets/ssr-DLOpnERD.css" />
       </head>
       <body>
         {children}
