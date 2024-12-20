@@ -75,6 +75,8 @@ export const signupFn = createServerFn({ method: "POST" })
       role: 'member'
     });
 
+    return ({email: data.email})  
+
     // Redirect to the prev page stored in the "redirect" search param
     // throw redirect({
     //   href: '/',
@@ -112,8 +114,6 @@ export const loginFn = createServerFn({ method: "POST" })
       user: found[0].email,
       role: 'member'
     });
-
-    console.log("The Email ", found[0].email)
 
     return ({email: found[0].email})  
 

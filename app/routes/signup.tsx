@@ -3,6 +3,7 @@ import { createFileRoute, useRouter, redirect } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { signupFn } from '../auth-server';
+import { useUserEmail } from './__root';
 
 export const Route = createFileRoute('/signup')({
   component: SignupComponent,
@@ -29,7 +30,12 @@ function SignupComponent() {
   } = useForm({
     resolver: zodResolver(signupSchema),
   });
+  const { state, dispatch } = useUserEmail();
   const router = useRouter();
+
+  if (state.email) {
+    router.navigate({ to: '/dashboard' })
+  }
 
   const onSubmit = (data) => {
     if (data.password === data.confirmPassword) {
@@ -37,11 +43,16 @@ function SignupComponent() {
       console.log('Signup data:', data);
 
       signupFn({
-        data: data        
-      }).then(() => {
+        data: data
+      }).then((res) => {
         reset()
+        const { email } = res
+        dispatch({ type: 'SET_EMAIL', payload: email });
         router.invalidate()
+
         router.navigate({ to: '/dashboard' })
+      }).catch((error) => {
+        console.log("Error", error)
       });
     }
   };

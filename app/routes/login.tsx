@@ -18,6 +18,14 @@ const loginSchema = z.object({
 })
 
 function AuthComponent() {
+
+  const { state, dispatch } = useUserEmail();
+  const router = useRouter();
+
+  if (state.email) {
+    router.navigate({ to: '/dashboard' })
+  }
+
   const {
     register,
     handleSubmit,
@@ -26,10 +34,6 @@ function AuthComponent() {
   } = useForm({
     resolver: zodResolver(loginSchema),
   })
-
-  const { state, dispatch } = useUserEmail();
-
-  const router = useRouter();
 
   const [isIncorrectPassword, setIsIncorrectPassword] = useState(false)
 
