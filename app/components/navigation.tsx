@@ -3,6 +3,7 @@ import { Fragment } from "react/jsx-runtime";
 
 export default function Navigation() {
 
+
     return (
         <Fragment>
             <div className="p-2 flex gap-2 text-lg">
@@ -23,6 +24,31 @@ export default function Navigation() {
                 >
                     About
                 </Link>
+                <Link
+                    to="/dashboard"
+                    activeProps={{
+                        className: 'font-bold',
+                    }}
+                >
+                    Dashboard
+                </Link>
+                <Link
+                    to="/login"
+                    activeProps={{
+                        className: 'font-bold',
+                    }}
+                >
+                    Login
+                </Link>
+                <Link
+                    to="/signup"
+                    activeProps={{
+                        className: 'font-bold',
+                    }}
+                >
+                    Signup
+                </Link>
+
             </div>
             <hr />
         </Fragment>

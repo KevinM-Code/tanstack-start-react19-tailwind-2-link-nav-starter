@@ -1,4 +1,4 @@
-import { pgTable, text, integer, serial, uniqueIndex, foreignKey, boolean, varchar } from "drizzle-orm/pg-core"
+import { pgTable, text, integer, serial, uniqueIndex, foreignKey, boolean, varchar, timestamp } from "drizzle-orm/pg-core"
 import { sql } from "drizzle-orm"
 
 export const total = pgTable("Total", {
@@ -6,16 +6,19 @@ export const total = pgTable("Total", {
 	total: integer().notNull(),
 });
 
-export const usersTable = pgTable("users", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  name: varchar({ length: 255 }).notNull(),
-  age: integer().notNull(),
-  email: varchar({ length: 255 }).notNull().unique(),
+export const users = pgTable("users", {
+	id: integer().primaryKey().generatedAlwaysAsIdentity(),
+	email: text('email').unique().notNull(),
+	password: text('password').notNull(),
+	salt: text('salt').notNull(),
+	createdAt: timestamp('created_at').defaultNow().notNull(),
+	name: varchar({ length: 255 }),
+	age: integer(),
 });
 
 export const user = pgTable("User", {
 	id: serial().primaryKey().notNull(),
-	email: text().notNull(),
+	email: varchar({ length: 255 }).notNull(),
 	name: text(),
 }, (table) => [
 	uniqueIndex("User_email_key").using("btree", table.email.asc().nullsLast().op("text_ops")),
@@ -29,8 +32,9 @@ export const post = pgTable("Post", {
 	authorId: integer().notNull(),
 }, (table) => [
 	foreignKey({
-			columns: [table.authorId],
-			foreignColumns: [user.id],
-			name: "Post_authorId_fkey"
-		}).onUpdate("cascade").onDelete("restrict"),
+		columns: [table.authorId],
+		foreignColumns: [user.id],
+		name: "Post_authorId_fkey"
+	}).onUpdate("cascade").onDelete("restrict"),
 ]);
+

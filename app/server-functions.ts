@@ -22,7 +22,6 @@ async function readCount() {
     const theNumber = await db.insert(total).values({ total: 0 }).returning();
     return theNumber[0].total
   }
-
 }
 
 export const getCount = createServerFn({ method: "GET" }).handler(() => {
