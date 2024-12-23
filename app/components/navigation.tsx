@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { Fragment } from "react/jsx-runtime";
+import { useUserEmail } from "../routes/__root";
 
 export default function Navigation() {
 
+    const { state, dispatch } = useUserEmail();
 
     return (
         <Fragment>
@@ -48,6 +50,16 @@ export default function Navigation() {
                 >
                     Signup
                 </Link>
+               {state.email ? (<Link
+                    className="justify-self-end"
+                    to="/logout"
+                    activeProps={{
+                        className: 'font-bold',
+                    }}
+                >
+                    Logout
+                </Link>) : null}
+                
 
             </div>
             <hr />
