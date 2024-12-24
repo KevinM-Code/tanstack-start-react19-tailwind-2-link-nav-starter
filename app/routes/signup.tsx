@@ -3,7 +3,7 @@ import { createFileRoute, useRouter, redirect } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { signupFn } from '../auth-server';
-import { useUserEmail } from './__root';
+import { useUserEmail } from '../utils/context';
 
 export const Route = createFileRoute('/signup')({
   component: SignupComponent,

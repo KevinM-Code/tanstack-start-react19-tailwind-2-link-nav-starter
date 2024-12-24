@@ -4,7 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { loginFn } from '../auth-server'
 import { useState } from 'react'
-import { useUserEmail } from './__root'
+import { useUserEmail } from '../utils/context'
+
 
 
 export const Route = createFileRoute('/login')({

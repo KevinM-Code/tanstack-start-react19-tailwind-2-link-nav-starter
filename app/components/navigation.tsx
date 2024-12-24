@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Fragment } from "react/jsx-runtime";
-import { useUserEmail } from "../routes/__root";
+import { useUserEmail } from "../utils/context";
 
 export default function Navigation() {
 

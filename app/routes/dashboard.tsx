@@ -1,6 +1,6 @@
 
-import { useUserEmail } from './__root';
 import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { useUserEmail } from "../utils/context";
 
 export const Route = createFileRoute('/dashboard')({  
   component: RouteComponent

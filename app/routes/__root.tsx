@@ -4,12 +4,12 @@ import {
   createRootRoute,
 } from "@tanstack/react-router";
 import { Meta, Scripts } from "@tanstack/start";
-import { Fragment, Suspense, type ReactNode } from "react";
+import React, { Fragment, Suspense, type ReactNode } from "react";
 //import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import './main.css';
 import Navigation from "../components/navigation";
+import { UserEmailProvider } from "../utils/context";
 
-import React, { createContext, useReducer, useContext } from 'react';
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
@@ -22,40 +22,6 @@ const TanStackRouterDevtools =
         // default: res.TanStackRouterDevtoolsPanel
       })),
     )
-
-//Create the context
-const defaultValue = {}
-const UserEmailContext = createContext(defaultValue);
-
-// Create the reducer function
-const userEmailReducer = (state, action) => {
-  switch (action.type) {
-    case 'SET_EMAIL':
-      return { email: action.payload };
-    default:
-      return state;
-  }
-};
-
-// Create the context provider component
-const UserEmailProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(userEmailReducer, { email: null });
-
-  return (
-    <UserEmailContext.Provider value={{ state, dispatch }}>
-      {children}
-    </UserEmailContext.Provider>
-  );
-};
-
-// Custom hook to access the context
-export const useUserEmail = () => {
-  const context = useContext(UserEmailContext);
-  if (context === undefined) {
-    throw new Error('useUserEmail must be used within a UserEmailProvider');
-  }
-  return context;
-};
 
 export const Route = createRootRoute({
   head: () => ({
@@ -95,7 +61,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
     <html>
       <head>
         <Meta />
-        <link rel="stylesheet" href="/assets/ssr-DLOpnERD.css" />
+        <link rel="stylesheet" href="/assets/ssr-CrOS8A_E.css" />
       </head>
       <body>
         {children}

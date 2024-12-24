@@ -1,7 +1,8 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
-import { useUserEmail } from './__root'
+
 import { logoutFn } from '../auth-server'
 import { useEffect } from 'react'
+import { useUserEmail } from '../utils/context';
 
 
 export const Route = createFileRoute("/logout")({

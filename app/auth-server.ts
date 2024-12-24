@@ -121,6 +121,5 @@ export const logoutFn = createServerFn().handler(async () => {
   const session = await useAppSession()
 
   session.clear()
-
   
 })
