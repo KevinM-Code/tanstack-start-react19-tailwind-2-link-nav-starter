@@ -105,7 +105,7 @@ export const loginFn = createServerFn({ method: "POST" })
     }
 
     // Create a session
-    const session = await useSession<SessionData>(sessionConfig)
+    const session = await useAppSession()
 
     await session.update({
       user: found[0].email,
@@ -118,8 +118,15 @@ export const loginFn = createServerFn({ method: "POST" })
 
 
 export const logoutFn = createServerFn().handler(async () => {
-  const session = await useAppSession()
+  const session = await useAppSession()  
 
   session.clear()
+  
+})
+
+export const checkSessionFn = createServerFn().handler(async () => {
+  const session = await useAppSession()
+
+ return session.data 
   
 })

@@ -40,7 +40,6 @@ function SignupComponent() {
   const onSubmit = (data) => {
     if (data.password === data.confirmPassword) {
       delete data.confirmPassword;
-      console.log('Signup data:', data);
 
       signupFn({
         data: data

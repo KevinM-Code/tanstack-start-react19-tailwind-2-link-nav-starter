@@ -18,8 +18,6 @@ function Logout() {
   useEffect(() => {
     dispatch({ type: 'SET_EMAIL', payload: false });
 
-    console.log("The State ", state)
-
     router.invalidate()
     router.navigate({ to: '/' })
 

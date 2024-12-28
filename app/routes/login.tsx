@@ -39,7 +39,6 @@ function AuthComponent() {
   const [isIncorrectPassword, setIsIncorrectPassword] = useState(false)
 
   const onSubmit = (data) => {
-    console.log('Login data:', data)
 
     loginFn({
       data: data

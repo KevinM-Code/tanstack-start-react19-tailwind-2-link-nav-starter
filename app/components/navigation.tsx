@@ -1,10 +1,22 @@
 import { Link } from "@tanstack/react-router";
 import { Fragment } from "react/jsx-runtime";
 import { useUserEmail } from "../utils/context";
+import { useEffect } from "react";
+import { checkSessionFn } from "../auth-server";
 
 export default function Navigation() {
 
     const { state, dispatch } = useUserEmail();
+
+    useEffect(() => {
+        const session = checkSessionFn()
+
+        session.then((res) => {
+            if (res.user) {
+                dispatch({ type: 'SET_EMAIL', payload: res.user });
+            }
+        })
+    }, [])
 
     return (
         <Fragment>
@@ -50,7 +62,7 @@ export default function Navigation() {
                 >
                     Signup
                 </Link>
-               {state.email ? (<Link
+                {state.email ? (<Link
                     className="justify-self-end"
                     to="/logout"
                     activeProps={{
@@ -59,8 +71,6 @@ export default function Navigation() {
                 >
                     Logout
                 </Link>) : null}
-                
-
             </div>
             <hr />
         </Fragment>

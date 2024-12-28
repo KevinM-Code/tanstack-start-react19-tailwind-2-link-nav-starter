@@ -8,8 +8,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const state = Route.useLoaderData();
-  const router = useRouter();
+  const counterState = Route.useLoaderData();
+  const router = useRouter(); 
 
   return (
     <Fragment>
@@ -22,7 +22,7 @@ function Home() {
           }).then(() => router.invalidate());
         }}
       >
-        Add to {state}
+        Add to {counterState}
       </button>
     </Fragment>
   );

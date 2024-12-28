@@ -15,7 +15,6 @@ function RouteComponent() {
     return (<div>You are logged in {state.email}</div>)
   }
 
-  router.navigate({ to: '/login' })
-  
+  router.navigate({ to: '/login' }) 
   
 }
