@@ -7,7 +7,6 @@ import { useState } from 'react'
 import { useUserEmail } from '../utils/context'
 
 
-
 export const Route = createFileRoute('/login')({
   component: AuthComponent,
 
